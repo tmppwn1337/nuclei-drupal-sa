@@ -19,6 +19,8 @@ python3 extract_paths.py
 
 Rules/limitations:
 - Recursively reads repository files (excluding `.git` and the output file itself).
-- Extracts path-like strings (URLs, absolute paths, and relative paths with `/` separators).
+- Extracts path-like strings and keeps only fuzzing-oriented web paths.
+- Prioritizes paths found in `{{BaseURL}}`/`{{RootURL}}` template values.
+- Applies prefix filtering to reduce noise (keeps common Drupal/web prefixes like `/sites/`, `/admin/`, `/node`, `/user`, etc.).
 - De-duplicates and sorts extracted values.
-- Uses regex-based extraction, so results are best-effort path-like matches from text content.
+- Uses regex-based extraction and heuristic filtering, so results are best-effort fuzzing candidates.
