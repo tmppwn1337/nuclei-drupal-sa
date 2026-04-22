@@ -13,7 +13,7 @@ EXCLUDED_FILES = {OUTPUT_FILE.name}
 EXCLUDED_DIRS = {".git"}
 
 PATH_PATTERNS = [
-    re.compile(r"\b(?:https?|file)://[^\s\"'<>]+"),
+    re.compile(r"\b(?:https?|file)://[^\s\"'<>]{3,}"),
     re.compile(r"(?<![\w.-])/(?:[A-Za-z0-9._~!$&+,;=:@%\-]+/?)+"),
     re.compile(r"(?<![\w.-])\.\./(?:[A-Za-z0-9._~!$&+,;=:@%\-]+/?)+"),
     re.compile(r"(?<![\w.-])\./(?:[A-Za-z0-9._~!$&+,;=:@%\-]+/?)+"),
@@ -31,7 +31,7 @@ def iter_repo_files(root: Path):
 
 
 def normalize_match(value: str) -> str:
-    return value.strip().strip("\"'`.,;:!?)]}").lstrip("([{\"'`")
+    return value.strip("\"'`.,;:!?)]}").lstrip("([{\"'`")
 
 
 def extract_paths(content: str) -> set[str]:
